@@ -1,0 +1,54 @@
+name: Deploy to bennettwells.net/starship
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout starship-monitor
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Checkout bennettwells-website
+        uses: actions/checkout@v4
+        with:
+          repository: bennettwellsnet/bennettwells-website
+          token: ${{ secrets.WEBSITE_PAT }}
+          path: website
+
+      - name: Deploy build to /starship
+        run: |
+          mkdir -p website/starship
+          rm -rf website/starship/*
+          cp -r dist/* website/starship/
+          # Remove legacy redirect — static app replaces it
+          if grep -q '^/starship ' website/_redirects 2>/dev/null; then
+            grep -v '^/starship' website/_redirects > website/_redirects.tmp || true
+            mv website/_redirects.tmp website/_redirects
+          fi
+
+      - name: Commit and push
+        run: |
+          cd website
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add starship/ _redirects 2>/dev/null || git add starship/
+          git diff --staged --quiet && echo "No changes." || \
+            git commit -m "deploy: update Starship Progress Monitor" && git push
