@@ -1,49 +1,55 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
-/** Curated Starship integrated-flight-test history (fallback when API unavailable). */
+/** Curated Starship integrated-flight-test history (fallback when API unavailable).
+ *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-07-21).
+ */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
     id: 'ift-1',
     flightNumber: 1,
-    name: 'IFT-1',
+    name: 'Flight 1 (IFT-1)',
     dateUtc: '2023-04-20T13:33:00Z',
-    site: 'Starbase, TX',
+    site: 'Starbase OLP-1',
     outcome: 'failure',
-    summary: 'First integrated flight. Stage separation failed; vehicle lost at ~39 km.',
-    milestones: ['First full-stack launch', 'Reached supersonic flight'],
+    summary:
+      'First integrated flight (B7/S24). Multiple engine outages; loss of control before stage separation. Vehicle destroyed by flight termination.',
+    milestones: ['First full-stack launch', 'Cleared the pad'],
     reachedSpace: false,
   },
   {
     id: 'ift-2',
     flightNumber: 2,
-    name: 'IFT-2',
+    name: 'Flight 2 (IFT-2)',
     dateUtc: '2023-11-18T13:02:00Z',
-    site: 'Starbase, TX',
+    site: 'Starbase OLP-1',
     outcome: 'failure',
-    summary: 'Hot-staging demonstrated. Ship lost after reaching space.',
-    milestones: ['Hot-staging', 'Reached space (~150 km)'],
+    summary:
+      'Hot-staging demonstrated; all 33 booster engines burned full duration. Booster lost after boostback; ship destroyed after reaching space.',
+    milestones: ['Hot-staging', 'Reached space (~150 km)', 'Water deluge system'],
     reachedSpace: true,
   },
   {
     id: 'ift-3',
     flightNumber: 3,
-    name: 'IFT-3',
+    name: 'Flight 3 (IFT-3)',
     dateUtc: '2024-03-14T13:25:00Z',
-    site: 'Starbase, TX',
-    outcome: 'failure',
-    summary: 'Reached planned suborbital trajectory. Ship lost during reentry.',
-    milestones: ['Payload door demo', 'On-orbit propellant transfer demo'],
+    site: 'Starbase OLP-1',
+    outcome: 'partial',
+    summary:
+      'Full-duration second-stage burn and suborbital trajectory. Payload door and propellant-transfer demos. Both stages lost on landing attempts.',
+    milestones: ['Payload door demo', 'On-orbit propellant transfer demo', 'SECO'],
     reachedSpace: true,
   },
   {
     id: 'ift-4',
     flightNumber: 4,
-    name: 'IFT-4',
+    name: 'Flight 4 (IFT-4)',
     dateUtc: '2024-06-06T12:50:00Z',
-    site: 'Starbase, TX',
-    outcome: 'partial',
-    summary: 'Soft splashdown in Gulf of Mexico. Booster soft-landed in Gulf.',
-    milestones: ['Controlled reentry', 'Booster soft splashdown'],
+    site: 'Starbase OLP-1',
+    outcome: 'success',
+    summary:
+      'First controlled soft splashdowns of both stages. Ship survived reentry flap damage; booster soft-landed in the Gulf on a virtual-tower profile.',
+    milestones: ['Controlled reentry', 'Booster soft splashdown', 'Ship soft splashdown'],
     reachedSpace: true,
   },
   {
@@ -51,10 +57,11 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     flightNumber: 5,
     name: 'Flight 5',
     dateUtc: '2024-10-13T12:25:00Z',
-    site: 'Starbase, TX',
+    site: 'Starbase OLP-1',
     outcome: 'success',
-    summary: 'First booster catch at Mechazilla. Ship soft-landed in Indian Ocean.',
-    milestones: ['Tower catch (chopsticks)', 'Ship soft splashdown'],
+    summary:
+      'First Super Heavy tower catch at Mechazilla (B12). Ship soft-landed in the Indian Ocean. No engine failures on the full stack.',
+    milestones: ['Tower catch (chopsticks)', 'Ship soft splashdown', 'Engine-out free flight'],
     reachedSpace: true,
   },
   {
@@ -62,10 +69,11 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     flightNumber: 6,
     name: 'Flight 6',
     dateUtc: '2024-11-19T22:00:00Z',
-    site: 'Starbase, TX',
+    site: 'Starbase OLP-1',
     outcome: 'success',
-    summary: 'Repeat booster catch. Ship completed controlled reentry and splashdown.',
-    milestones: ['Second booster catch', 'Raptor relight in space'],
+    summary:
+      'Final Block 1 ship. Booster diverted to Gulf after tower damage on liftoff. Ship completed in-space Raptor relight and daylight soft splashdown.',
+    milestones: ['Raptor relight in space', 'Daylight ship splashdown', 'First payload (plush banana)'],
     reachedSpace: true,
   },
   {
@@ -73,21 +81,23 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     flightNumber: 7,
     name: 'Flight 7',
     dateUtc: '2025-01-16T22:37:00Z',
-    site: 'Starbase, TX',
-    outcome: 'partial',
-    summary: 'Upgraded ship (Block 2). Booster catch missed; ship splashdown achieved.',
-    milestones: ['Block 2 ship debut', 'New forward flaps'],
+    site: 'Starbase OLP-1',
+    outcome: 'failure',
+    summary:
+      'Block 2 ship debut (S33). Booster catch succeeded. Ship lost ~8.5 min into flight after propellant leak and engine shutdowns during ascent burn.',
+    milestones: ['Block 2 ship debut', 'Booster catch', 'Starlink simulators (not deployed)'],
     reachedSpace: true,
   },
   {
     id: 'flight-8',
     flightNumber: 8,
     name: 'Flight 8',
-    dateUtc: '2025-03-06T23:30:00Z',
-    site: 'Starbase, TX',
+    dateUtc: '2025-03-06T23:31:00Z',
+    site: 'Starbase OLP-1',
     outcome: 'failure',
-    summary: 'Multiple Raptor failures on ascent. Ship and booster lost.',
-    milestones: ['V3 booster pathfinder'],
+    summary:
+      'Ship (S34) lost control during ascent burn after multiple Raptor shutdowns. Booster (B15) successfully caught despite two boostback engine issues.',
+    milestones: ['Booster catch', 'Block 2 path refinement'],
     reachedSpace: false,
   },
   {
@@ -95,10 +105,11 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     flightNumber: 9,
     name: 'Flight 9',
     dateUtc: '2025-05-27T23:36:00Z',
-    site: 'Starbase, TX',
-    outcome: 'partial',
-    summary: 'Booster returned to pad; ship lost during aggressive reentry test.',
-    milestones: ['Booster catch', 'High-angle reentry test'],
+    site: 'Starbase OLP-1',
+    outcome: 'failure',
+    summary:
+      'First Super Heavy reflight (B14-2). Booster lost before Gulf splashdown; ship reached SECO but failed payload deploy and broke up on reentry.',
+    milestones: ['First booster reflight', 'Ship SECO', 'Aggressive reentry profile'],
     reachedSpace: true,
   },
   {
@@ -106,43 +117,56 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     flightNumber: 10,
     name: 'Flight 10',
     dateUtc: '2025-08-26T23:30:00Z',
-    site: 'Starbase, TX',
+    site: 'Starbase OLP-1',
     outcome: 'success',
-    summary: 'Successful booster catch and ship splashdown in target zone.',
-    milestones: ['Block 2 ship refinement', 'Night launch'],
+    summary:
+      'First Starlink simulator deployment (8 sats). In-space Raptor relight; ship soft splashdown ~3 m from target despite engine-section heat damage.',
+    milestones: ['Starlink simulator deploy', 'Raptor relight', 'Ship soft splashdown'],
     reachedSpace: true,
   },
   {
     id: 'flight-11',
     flightNumber: 11,
     name: 'Flight 11',
-    dateUtc: '2025-10-13T23:10:00Z',
-    site: 'Starbase, TX',
+    dateUtc: '2025-10-13T23:23:00Z',
+    site: 'Starbase OLP-1',
     outcome: 'success',
-    summary: 'Demonstrated rapid turnaround cadence. Full mission profile success.',
-    milestones: ['Payload deployment demo', 'Booster catch'],
+    summary:
+      'Final Block 2 flight and last launch from OLP-1 pre-retrofit. Eight simulators deployed; ship mostly undamaged through reentry with tiles intentionally removed. Soft splashdown on target.',
+    milestones: ['Last Block 2 flight', 'Starlink simulators', 'Heat-shield tile removal test'],
     reachedSpace: true,
   },
   {
     id: 'flight-12',
     flightNumber: 12,
     name: 'Flight 12',
-    dateUtc: '2026-05-22T23:15:00Z',
-    site: 'Starbase, TX',
-    outcome: 'success',
-    summary: 'Latest flight as of June 2026. Booster catch and ship splashdown.',
-    milestones: ['V3 ship hardware', 'Increased propellant load'],
+    dateUtc: '2026-05-22T22:30:00Z',
+    site: 'Starbase OLP-2',
+    outcome: 'partial',
+    summary:
+      'Block 3 debut (B19/S39) and first launch from Pad 2. Ship reached SECO, deployed 20 simulators + 2 Starlink V3 test sats, soft-landed in ocean. Booster boostback failed; high-speed Gulf impact.',
+    milestones: [
+      'Block 3 / V3 hardware debut',
+      'First OLP-2 launch',
+      'Starlink V3 test sats',
+      'Ship soft splashdown',
+    ],
     reachedSpace: true,
   },
   {
     id: 'flight-13',
     flightNumber: 13,
     name: 'Flight 13',
-    dateUtc: '2026-08-15T00:00:00Z',
-    site: 'Starbase, TX',
+    dateUtc: '2026-07-23T22:45:00Z',
+    site: 'Starbase OLP-2',
     outcome: 'upcoming',
-    summary: 'Next integrated flight test — targeting ship recovery improvements and higher cadence.',
-    milestones: ['Ship landing zone test', 'Booster catch repeat'],
+    summary:
+      'Second Block 3 flight (B20/S40). Suborbital profile with planned ship soft splashdown and booster water landing. Prior attempt aborted Jul 16 on engine start; window opens 5:45 p.m. CT.',
+    milestones: [
+      '20 Starlink V3 satellites (planned)',
+      'In-space Raptor relight reattempt',
+      'Ship soft splashdown',
+    ],
     reachedSpace: false,
   },
 ];
@@ -150,35 +174,43 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
 export const FALLBACK_NEWS: NewsItem[] = [
   {
     id: 'n1',
-    title: 'Flight 12 completes with booster catch and ship splashdown',
-    date: '2026-05-23',
+    title: 'Flight 13 retargeted for Thursday, July 23 after abort',
+    date: '2026-07-19',
+    source: 'SpaceX',
+    url: 'https://www.spacex.com/launches/starship-flight-13',
+    tag: 'flight',
+  },
+  {
+    id: 'n2',
+    title: 'Flight 13 countdown aborted late in window on July 16',
+    date: '2026-07-16',
+    source: 'SpaceX',
+    url: 'https://www.spacex.com/launches/starship-flight-13',
+    tag: 'update',
+  },
+  {
+    id: 'n3',
+    title: 'Flight 12: Block 3 debut — ship success, booster lost on landing',
+    date: '2026-05-22',
     source: 'SpaceX',
     url: 'https://www.spacex.com/launches',
     tag: 'flight',
   },
   {
-    id: 'n2',
-    title: 'Starbase pad upgrades continue ahead of Flight 13',
-    date: '2026-06-15',
+    id: 'n4',
+    title: 'Pad 2 (OLP-2) hosts first Starship launch on Flight 12',
+    date: '2026-05-22',
     source: 'NASASpaceflight',
     url: 'https://www.youtube.com/@NASASpaceflight',
     tag: 'infrastructure',
   },
   {
-    id: 'n3',
-    title: 'Starship HLS variant progressing toward lunar demo milestones',
-    date: '2026-06-01',
-    source: 'SpaceX Updates',
-    url: 'https://www.spacex.com/updates',
-    tag: 'milestone',
-  },
-  {
-    id: 'n4',
-    title: 'FAA license window opens for next Starship flight test campaign',
-    date: '2026-06-20',
+    id: 'n5',
+    title: 'Flight 11 closes Block 2 era with full mission success',
+    date: '2025-10-13',
     source: 'SpaceX',
-    url: 'https://www.spacex.com/vehicles/starship',
-    tag: 'update',
+    url: 'https://www.spacex.com/launches/starship-flight-11',
+    tag: 'milestone',
   },
 ];
 
@@ -188,6 +220,7 @@ export function buildFallbackDashboard(): DashboardData {
   const partials = completed.filter((f) => f.outcome === 'partial').length;
   const reachedSpace = completed.filter((f) => f.reachedSpace).length;
   const year = new Date().getFullYear();
+  const upcoming = FALLBACK_FLIGHTS.find((f) => f.outcome === 'upcoming');
 
   return {
     flights: FALLBACK_FLIGHTS,
@@ -201,10 +234,10 @@ export function buildFallbackDashboard(): DashboardData {
       flights2026: FALLBACK_FLIGHTS.filter(
         (f) => new Date(f.dateUtc).getFullYear() === year && f.outcome !== 'upcoming',
       ).length,
-      nextFlightNumber: 13,
+      nextFlightNumber: upcoming?.flightNumber ?? completed.length + 1,
     },
     news: FALLBACK_NEWS,
-    nextLaunchDate: '2026-08-15T00:00:00Z',
+    nextLaunchDate: upcoming?.dateUtc ?? '2026-07-23T22:45:00Z',
     rocketName: 'Starship',
     dataSource: 'fallback',
     lastUpdated: new Date().toISOString(),
