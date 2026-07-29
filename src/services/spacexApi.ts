@@ -108,13 +108,37 @@ async function fetchStarshipLaunches(rocketId: string): Promise<SpaceXLaunch[]> 
 
 function mergeWithFallback(apiFlights: StarshipFlight[]): StarshipFlight[] {
   if (apiFlights.length === 0) return FALLBACK_FLIGHTS;
-  const byId = new Map(apiFlights.map((f) => [f.id, f]));
+
+  // Prefer curated fallback for known flight numbers — API often lags on
+  // Starship outcomes, milestones, and accurate site/summary text.
+  const byNumber = new Map<number, StarshipFlight>();
+  for (const api of apiFlights) {
+    byNumber.set(api.flightNumber, api);
+  }
   for (const fb of FALLBACK_FLIGHTS) {
-    if (![...byId.values()].some((f) => f.flightNumber === fb.flightNumber)) {
-      byId.set(fb.id, fb);
+    const existing = byNumber.get(fb.flightNumber);
+    if (!existing) {
+      byNumber.set(fb.flightNumber, fb);
+      continue;
+    }
+    const apiIncomplete =
+      existing.outcome === 'upcoming' || existing.outcome === 'scrubbed';
+    const fbComplete = fb.outcome !== 'upcoming' && fb.outcome !== 'scrubbed';
+    if (fbComplete && apiIncomplete) {
+      byNumber.set(fb.flightNumber, fb);
+    } else if (fb.milestones.length > existing.milestones.length) {
+      byNumber.set(fb.flightNumber, {
+        ...existing,
+        summary: fb.summary || existing.summary,
+        milestones: fb.milestones,
+        site: fb.site || existing.site,
+        reachedSpace: fb.reachedSpace || existing.reachedSpace,
+        outcome: fbComplete ? fb.outcome : existing.outcome,
+      });
     }
   }
-  return [...byId.values()].sort(
+
+  return [...byNumber.values()].sort(
     (a, b) => new Date(a.dateUtc).getTime() - new Date(b.dateUtc).getTime(),
   );
 }

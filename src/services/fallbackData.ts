@@ -1,7 +1,7 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
 /** Curated Starship integrated-flight-test history (fallback when API unavailable).
- *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-07-21).
+ *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-07-29).
  */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
@@ -157,15 +157,32 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     id: 'flight-13',
     flightNumber: 13,
     name: 'Flight 13',
-    dateUtc: '2026-07-23T22:45:00Z',
+    dateUtc: '2026-07-24T22:51:00Z',
+    site: 'Starbase OLP-2',
+    outcome: 'success',
+    summary:
+      'Second V3 flight (B20/S40). First operational Starlink V3 satellite deployment (20 sats). Ship soft-splashdown intact in the Indian Ocean with first clear intact-heatshield views. Booster completed full 33-engine boostback; incomplete landing-burn relight led to a hard Gulf splashdown.',
+    milestones: [
+      'First Starlink V3 deploy',
+      'Ship soft splashdown (intact)',
+      'Intact heatshield imagery',
+      'V3 full-duration boostback',
+    ],
+    reachedSpace: true,
+  },
+  {
+    id: 'flight-14',
+    flightNumber: 14,
+    name: 'Flight 14',
+    dateUtc: '2026-08-20T22:00:00Z',
     site: 'Starbase OLP-2',
     outcome: 'upcoming',
     summary:
-      'Second Block 3 flight (B20/S40). Suborbital profile with planned ship soft splashdown and booster water landing. Prior attempt aborted Jul 16 on engine start; window opens 5:45 p.m. CT.',
+      'Third Block 3 flight (expected B21/S41). Planned first attempt at a stable Earth orbit and first Starship upper-stage tower catch with Mechazilla chopsticks. NET August 2026; date subject to hardware readiness.',
     milestones: [
-      '20 Starlink V3 satellites (planned)',
-      'In-space Raptor relight reattempt',
-      'Ship soft splashdown',
+      'First ship tower catch (planned)',
+      'First stable orbit attempt (planned)',
+      'Ship return-to-launch-site profile',
     ],
     reachedSpace: false,
   },
@@ -174,22 +191,30 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
 export const FALLBACK_NEWS: NewsItem[] = [
   {
     id: 'n1',
-    title: 'Flight 13 retargeted for Thursday, July 23 after abort',
-    date: '2026-07-19',
+    title: 'SpaceX targets first Starship upper-stage tower catch on Flight 14',
+    date: '2026-07-25',
+    source: 'SpaceNews / satnews',
+    url: 'https://satnews.com/2026/07/25/spacex-targets-first-starship-upper-stage-tower-catch-for-flight-14/',
+    tag: 'milestone',
+  },
+  {
+    id: 'n2',
+    title: 'Flight 13: Starlink V3 deploy + soft ship splashdown with intact heatshield',
+    date: '2026-07-24',
     source: 'SpaceX',
     url: 'https://www.spacex.com/launches/starship-flight-13',
     tag: 'flight',
   },
   {
-    id: 'n2',
-    title: 'Flight 13 countdown aborted late in window on July 16',
-    date: '2026-07-16',
+    id: 'n3',
+    title: 'Flight 13 liftoff from Starbase Pad 2 — second V3 integrated test',
+    date: '2026-07-24',
     source: 'SpaceX',
     url: 'https://www.spacex.com/launches/starship-flight-13',
     tag: 'update',
   },
   {
-    id: 'n3',
+    id: 'n4',
     title: 'Flight 12: Block 3 debut — ship success, booster lost on landing',
     date: '2026-05-22',
     source: 'SpaceX',
@@ -197,7 +222,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     tag: 'flight',
   },
   {
-    id: 'n4',
+    id: 'n5',
     title: 'Pad 2 (OLP-2) hosts first Starship launch on Flight 12',
     date: '2026-05-22',
     source: 'NASASpaceflight',
@@ -205,7 +230,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     tag: 'infrastructure',
   },
   {
-    id: 'n5',
+    id: 'n6',
     title: 'Flight 11 closes Block 2 era with full mission success',
     date: '2025-10-13',
     source: 'SpaceX',
@@ -237,7 +262,7 @@ export function buildFallbackDashboard(): DashboardData {
       nextFlightNumber: upcoming?.flightNumber ?? completed.length + 1,
     },
     news: FALLBACK_NEWS,
-    nextLaunchDate: upcoming?.dateUtc ?? '2026-07-23T22:45:00Z',
+    nextLaunchDate: upcoming?.dateUtc ?? '2026-08-20T22:00:00Z',
     rocketName: 'Starship',
     dataSource: 'fallback',
     lastUpdated: new Date().toISOString(),
