@@ -1,7 +1,7 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
 /** Curated Starship integrated-flight-test history (fallback when API unavailable).
- *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-07-29).
+ *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-08-09).
  */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
@@ -174,11 +174,11 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     id: 'flight-14',
     flightNumber: 14,
     name: 'Flight 14',
-    dateUtc: '2026-08-20T22:00:00Z',
+    dateUtc: '2026-09-15T22:00:00Z',
     site: 'Starbase OLP-2',
     outcome: 'upcoming',
     summary:
-      'Third Block 3 flight (expected B21/S41). Planned first attempt at a stable Earth orbit and first Starship upper-stage tower catch with Mechazilla chopsticks. NET August 2026; date subject to hardware readiness.',
+      'Third Block 3 flight (expected B21/S41). Planned first attempt at a stable Earth orbit and first Starship upper-stage tower catch with Mechazilla chopsticks. NET late August / mid-September 2026; date subject to hardware readiness.',
     milestones: [
       'First ship tower catch (planned)',
       'First stable orbit attempt (planned)',
@@ -189,6 +189,14 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
 ];
 
 export const FALLBACK_NEWS: NewsItem[] = [
+  {
+    id: 'n0',
+    title: 'Flight 14 prep continues — NET late Aug / mid-Sep for first ship catch attempt',
+    date: '2026-08-09',
+    source: 'Next Spaceflight / NSF',
+    url: 'https://nextspaceflight.com/starship/',
+    tag: 'update',
+  },
   {
     id: 'n1',
     title: 'SpaceX targets first Starship upper-stage tower catch on Flight 14',
@@ -262,7 +270,7 @@ export function buildFallbackDashboard(): DashboardData {
       nextFlightNumber: upcoming?.flightNumber ?? completed.length + 1,
     },
     news: FALLBACK_NEWS,
-    nextLaunchDate: upcoming?.dateUtc ?? '2026-08-20T22:00:00Z',
+    nextLaunchDate: upcoming?.dateUtc ?? '2026-09-15T22:00:00Z',
     rocketName: 'Starship',
     dataSource: 'fallback',
     lastUpdated: new Date().toISOString(),

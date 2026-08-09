@@ -10,7 +10,7 @@ function pad(n: number) {
   return String(n).padStart(2, '0');
 }
 
-export function CountdownTimer({ targetDate, label = 'Flight 13' }: Props) {
+export function CountdownTimer({ targetDate, label = 'Flight 14' }: Props) {
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
