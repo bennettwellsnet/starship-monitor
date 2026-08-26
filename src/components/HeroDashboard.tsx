@@ -34,8 +34,8 @@ export function HeroDashboard({ data }: Props) {
             </span>
           </h1>
           <p className="mt-4 max-w-xl text-slate-400">
-            Tracking integrated flight tests, booster catches, ship recovery milestones, and the
-            road to rapid reusability at Starbase.
+            Tracking integrated flight tests, the first orbital attempt, ship recovery, and the
+            road to rapid reusability — Starbase today, Louisiana next.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             <span className="rounded-lg bg-emerald-500/15 px-3 py-1 text-sm text-emerald-400">

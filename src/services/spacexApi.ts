@@ -126,6 +126,13 @@ function mergeWithFallback(apiFlights: StarshipFlight[]): StarshipFlight[] {
     const fbComplete = fb.outcome !== 'upcoming' && fb.outcome !== 'scrubbed';
     if (fbComplete && apiIncomplete) {
       byNumber.set(fb.flightNumber, fb);
+    } else if (existing.outcome === 'upcoming' && fb.outcome === 'upcoming') {
+      // API often lags on Starship NET dates and mission profile text.
+      byNumber.set(fb.flightNumber, {
+        ...existing,
+        ...fb,
+        id: existing.id,
+      });
     } else if (fb.milestones.length > existing.milestones.length) {
       byNumber.set(fb.flightNumber, {
         ...existing,

@@ -6,7 +6,7 @@ Live dashboard tracking SpaceX Starship integrated flight tests, milestones, and
 
 ## Features
 
-- Hero dashboard with status, metrics, and Flight 13+ countdown
+- Hero dashboard with status, metrics, and Flight 14 countdown
 - Interactive flight timeline (IFT-1 through upcoming flights)
 - Recharts analytics: outcome breakdown and yearly cadence
 - News/updates feed with official SpaceX and NASASpaceflight links

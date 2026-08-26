@@ -1,7 +1,7 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
 /** Curated Starship integrated-flight-test history (fallback when API unavailable).
- *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-08-09).
+ *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-08-26).
  */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
@@ -178,11 +178,12 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     site: 'Starbase OLP-2',
     outcome: 'upcoming',
     summary:
-      'Third Block 3 flight (expected B21/S41). Planned first attempt at a stable Earth orbit and first Starship upper-stage tower catch with Mechazilla chopsticks. NET late August / mid-September 2026; date subject to hardware readiness.',
+      'Third Block 3 flight (B21/S41). Planned first attempt at a stable Earth orbit, deploying ~20 Starlink V3 satellites to operational service. Tower catch of the ship is deferred to a later flight after Musk said it is “a few months” out (FAA landing-zone approval). Booster splashdown expected in the Gulf; ship splashdown expected in the Indian Ocean. NET early-to-mid September 2026 pending Booster 21 static fire. Ship 41 completed its six-engine static fire on Aug 21.',
     milestones: [
-      'First ship tower catch (planned)',
       'First stable orbit attempt (planned)',
-      'Ship return-to-launch-site profile',
+      'Starlink V3 to operational orbit (planned)',
+      'Ship catch deferred (later flight)',
+      'Ship 41 six-engine static fire complete',
     ],
     reachedSpace: false,
   },
@@ -191,22 +192,39 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
 export const FALLBACK_NEWS: NewsItem[] = [
   {
     id: 'n0',
-    title: 'Flight 14 prep continues — NET late Aug / mid-Sep for first ship catch attempt',
-    date: '2026-08-09',
-    source: 'Next Spaceflight / NSF',
-    url: 'https://nextspaceflight.com/starship/',
-    tag: 'update',
+    title: 'Starbase Louisiana: $100B, 10-pad Starship spaceport on the Gulf Coast',
+    date: '2026-08-25',
+    source: 'SpaceNews',
+    url: 'https://spacenews.com/spacex-to-develop-starship-launch-site-in-louisiana/',
+    tag: 'infrastructure',
   },
   {
     id: 'n1',
-    title: 'SpaceX targets first Starship upper-stage tower catch on Flight 14',
-    date: '2026-07-25',
-    source: 'SpaceNews / satnews',
-    url: 'https://satnews.com/2026/07/25/spacex-targets-first-starship-upper-stage-tower-catch-for-flight-14/',
-    tag: 'milestone',
+    title: 'Ship 41 completes six-engine static fire ahead of Flight 14',
+    date: '2026-08-21',
+    source: 'NASASpaceflight',
+    url: 'https://www.nasaspaceflight.com/2026/08/ship-41-engine-testing-flight-14/',
+    tag: 'update',
   },
   {
     id: 'n2',
+    title:
+      'Flight 14 ship catch deferred — Musk: “in a few months”; first ship reflight NET late 2026 / early 2027',
+    date: '2026-08-20',
+    source: 'SpaceNews',
+    url: 'https://spacenews.com/spacex-scales-back-plans-for-next-starship-launch/',
+    tag: 'update',
+  },
+  {
+    id: 'n3',
+    title: 'Ship 40 towed to Christmas Island after 24-day ocean recovery',
+    date: '2026-08-18',
+    source: 'Space.com',
+    url: 'https://www.space.com/space-exploration/launches-spacecraft/starship-lives-spacex-craft-arrives-at-christmas-island-after-24-day-ocean-ordeal',
+    tag: 'milestone',
+  },
+  {
+    id: 'n4',
     title: 'Flight 13: Starlink V3 deploy + soft ship splashdown with intact heatshield',
     date: '2026-07-24',
     source: 'SpaceX',
@@ -214,15 +232,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     tag: 'flight',
   },
   {
-    id: 'n3',
-    title: 'Flight 13 liftoff from Starbase Pad 2 — second V3 integrated test',
-    date: '2026-07-24',
-    source: 'SpaceX',
-    url: 'https://www.spacex.com/launches/starship-flight-13',
-    tag: 'update',
-  },
-  {
-    id: 'n4',
+    id: 'n5',
     title: 'Flight 12: Block 3 debut — ship success, booster lost on landing',
     date: '2026-05-22',
     source: 'SpaceX',
@@ -230,20 +240,12 @@ export const FALLBACK_NEWS: NewsItem[] = [
     tag: 'flight',
   },
   {
-    id: 'n5',
+    id: 'n6',
     title: 'Pad 2 (OLP-2) hosts first Starship launch on Flight 12',
     date: '2026-05-22',
     source: 'NASASpaceflight',
     url: 'https://www.youtube.com/@NASASpaceflight',
     tag: 'infrastructure',
-  },
-  {
-    id: 'n6',
-    title: 'Flight 11 closes Block 2 era with full mission success',
-    date: '2025-10-13',
-    source: 'SpaceX',
-    url: 'https://www.spacex.com/launches/starship-flight-11',
-    tag: 'milestone',
   },
 ];
 
