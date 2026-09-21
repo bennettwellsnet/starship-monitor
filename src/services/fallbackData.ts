@@ -1,7 +1,7 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
 /** Curated Starship integrated-flight-test history (fallback when API unavailable).
- *  Sources: SpaceX flight pages, Wikipedia List of Starship launches (as of 2026-08-26).
+ *  Sources: SpaceX flight pages, Wikipedia Starship flight 14 (as of 2026-09-21).
  */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
@@ -174,22 +174,39 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     id: 'flight-14',
     flightNumber: 14,
     name: 'Flight 14',
-    dateUtc: '2026-09-15T22:00:00Z',
+    dateUtc: '2026-09-28T12:15:00Z',
     site: 'Starbase OLP-2',
     outcome: 'upcoming',
     summary:
-      'Third Block 3 flight (B21/S41). Planned first attempt at a stable Earth orbit, deploying ~20 Starlink V3 satellites to operational service. Tower catch of the ship is deferred to a later flight after Musk said it is “a few months” out (FAA landing-zone approval). Booster splashdown expected in the Gulf; ship splashdown expected in the Indian Ocean. NET early-to-mid September 2026 pending Booster 21 static fire. Ship 41 completed its six-engine static fire on Aug 21.',
+      'Third Block 3 flight (B21/S41). First attempt at a sustained orbit (~275 km, about six revolutions, nearly 10 hours), deploying 26 Starlink V3 satellites (Group 31-1), three carrying cameras to image the heat shield. Booster splashdown planned in the Gulf; ship splashdown planned in the Pacific west of Chile. Tower catch stays deferred. NET Sept 28, 2026, 12:15 UTC (7:15 a.m. CDT), 75-minute window, pending regulatory approval. Booster 21 finished a full-duration 33-engine static fire on Aug 28; Ship 41 finished its six-engine static fire on Aug 21.',
     milestones: [
-      'First stable orbit attempt (planned)',
-      'Starlink V3 to operational orbit (planned)',
-      'Ship catch deferred (later flight)',
-      'Ship 41 six-engine static fire complete',
+      'First sustained orbit attempt (planned)',
+      '26 Starlink V3 to operational orbit (planned)',
+      'Pacific ship splashdown, west of Chile (planned)',
+      'Booster 21 full-duration static fire complete',
     ],
     reachedSpace: false,
   },
 ];
 
 export const FALLBACK_NEWS: NewsItem[] = [
+  {
+    id: 'n8',
+    title:
+      'Flight 14 NET Sept 28: first orbit, 26 Starlink V3, Pacific splashdown — regulatory approval still pending',
+    date: '2026-09-17',
+    source: 'SpaceX',
+    url: 'https://www.spacex.com/launches/starship-flight-14',
+    tag: 'flight',
+  },
+  {
+    id: 'n7',
+    title: 'Booster 21 completes full-duration 33-engine static fire ahead of Flight 14',
+    date: '2026-08-29',
+    source: 'Space.com',
+    url: 'https://www.space.com/space-exploration/launches-spacecraft/spacex-test-fires-starship-super-heavy-booster-ahead-of-key-test-flight',
+    tag: 'update',
+  },
   {
     id: 'n0',
     title: 'Starbase Louisiana: $100B, 10-pad Starship spaceport on the Gulf Coast',
@@ -272,7 +289,7 @@ export function buildFallbackDashboard(): DashboardData {
       nextFlightNumber: upcoming?.flightNumber ?? completed.length + 1,
     },
     news: FALLBACK_NEWS,
-    nextLaunchDate: upcoming?.dateUtc ?? '2026-09-15T22:00:00Z',
+    nextLaunchDate: upcoming?.dateUtc ?? '2026-09-28T12:15:00Z',
     rocketName: 'Starship',
     dataSource: 'fallback',
     lastUpdated: new Date().toISOString(),
