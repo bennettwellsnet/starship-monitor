@@ -1,5 +1,14 @@
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import type { FlightOutcome, StarshipFlight } from '../types';
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function formatUtc(iso: string) {
+  const d = parseISO(iso);
+  const hh = String(d.getUTCHours()).padStart(2, '0');
+  const mm = String(d.getUTCMinutes()).padStart(2, '0');
+  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} · ${hh}:${mm}`;
+}
 
 const OUTCOME_STYLES: Record<FlightOutcome, string> = {
   success: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400',
@@ -45,7 +54,7 @@ export function FlightTimeline({ flights }: Props) {
                     dateTime={flight.dateUtc}
                     className="text-sm text-slate-500"
                   >
-                    {format(parseISO(flight.dateUtc), 'MMM d, yyyy · HH:mm')} UTC
+                    {formatUtc(flight.dateUtc)} UTC
                   </time>
                 </div>
                 <span
