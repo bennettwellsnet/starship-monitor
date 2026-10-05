@@ -5,9 +5,14 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 function formatUtc(iso: string) {
   const d = parseISO(iso);
+  const date = `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+  // A midnight timestamp is a date-only NET, not an announced liftoff time.
+  if (d.getUTCHours() === 0 && d.getUTCMinutes() === 0 && d.getUTCSeconds() === 0) {
+    return `${date} · NET`;
+  }
   const hh = String(d.getUTCHours()).padStart(2, '0');
   const mm = String(d.getUTCMinutes()).padStart(2, '0');
-  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} · ${hh}:${mm}`;
+  return `${date} · ${hh}:${mm} UTC`;
 }
 
 const OUTCOME_STYLES: Record<FlightOutcome, string> = {
@@ -54,7 +59,7 @@ export function FlightTimeline({ flights }: Props) {
                     dateTime={flight.dateUtc}
                     className="text-sm text-slate-500"
                   >
-                    {formatUtc(flight.dateUtc)} UTC
+                    {formatUtc(flight.dateUtc)}
                   </time>
                 </div>
                 <span

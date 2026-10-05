@@ -1,7 +1,7 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
 /** Curated Starship integrated-flight-test history (fallback when API unavailable).
- *  Sources: SpaceX flight pages, Wikipedia Starship flight 14 (as of 2026-09-21).
+ *  Sources: SpaceX flight pages, Wikipedia Starship flights 14 and 15 (as of 2026-10-05).
  */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
@@ -174,16 +174,32 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     id: 'flight-14',
     flightNumber: 14,
     name: 'Flight 14',
-    dateUtc: '2026-09-28T12:15:00Z',
+    dateUtc: '2026-09-28T12:48:59Z',
+    site: 'Starbase OLP-2',
+    outcome: 'success',
+    summary:
+      'Third Block 3 flight (B21/S41) and the first Starship to reach orbit. Liftoff 12:48:59 UTC. One Raptor Vacuum shut down early, so a planned six-orbit, ~10-hour flight was cut to 3 hours 9 minutes. A single sea-level Raptor circularized into roughly 262 × 275 km. All 26 Starlink V3 satellites (Group 31-1) deployed and were reported operating. Booster soft-splashed in the Gulf on 11 of 13 landing engines. Ship deorbited, survived reentry, and soft-splashed north of Hawaii, then tipped over.',
+    milestones: [
+      'First sustained orbit',
+      '26 operational Starlink V3 deployed',
+      'Ship soft splashdown (North Pacific)',
+      'Booster soft splashdown (Gulf)',
+    ],
+    reachedSpace: true,
+  },
+  {
+    id: 'flight-15',
+    flightNumber: 15,
+    name: 'Flight 15',
+    dateUtc: '2026-10-19T00:00:00Z',
     site: 'Starbase OLP-2',
     outcome: 'upcoming',
     summary:
-      'Third Block 3 flight (B21/S41). First attempt at a sustained orbit (~275 km, about six revolutions, nearly 10 hours), deploying 26 Starlink V3 satellites (Group 31-1), three carrying cameras to image the heat shield. Booster splashdown planned in the Gulf; ship splashdown planned in the Pacific west of Chile. Tower catch stays deferred. NET Sept 28, 2026, 12:15 UTC (7:15 a.m. CDT), 75-minute window, pending regulatory approval. Booster 21 finished a full-duration 33-engine static fire on Aug 28; Ship 41 finished its six-engine static fire on Aug 21.',
+      'Fourth Block 3 flight (B22/S42), planned from Pad 2 into low Earth orbit. Air-traffic planning still lists a provisional NET of October 19, 2026; SpaceX has not announced an official date or time, so the clock tracks that UTC date only. Payload and recovery plan are unconfirmed. A tower catch of the ship — and possibly the first Block 3 booster catch — remains a discussed goal. Ship 42 completed chopstick catch tests at Pad 2 on Sept 11–12.',
     milestones: [
-      'First sustained orbit attempt (planned)',
-      '26 Starlink V3 to operational orbit (planned)',
-      'Pacific ship splashdown, west of Chile (planned)',
-      'Booster 21 full-duration static fire complete',
+      'Provisional NET Oct 19 (no official T-0)',
+      'Possible first ship tower catch',
+      'Ship 42 chopstick tests complete',
     ],
     reachedSpace: false,
   },
@@ -193,10 +209,19 @@ export const FALLBACK_NEWS: NewsItem[] = [
   {
     id: 'n8',
     title:
-      'Flight 14 NET Sept 28: first orbit, 26 Starlink V3, Pacific splashdown — regulatory approval still pending',
-    date: '2026-09-17',
+      'Flight 14 reaches orbit, deploys all 26 Starlink V3 satellites, and splashes down north of Hawaii after an engine-out',
+    date: '2026-09-28',
     source: 'SpaceX',
     url: 'https://www.spacex.com/launches/starship-flight-14',
+    tag: 'flight',
+  },
+  {
+    id: 'n9',
+    title:
+      'Flight 15: provisional NET Oct 19 from Starbase (B22/S42); no official SpaceX date, ship catch still unconfirmed',
+    date: '2026-09-24',
+    source: 'NASASpaceflight',
+    url: 'https://x.com/NASASpaceflight/status/2103132527351259376',
     tag: 'flight',
   },
   {
@@ -289,7 +314,7 @@ export function buildFallbackDashboard(): DashboardData {
       nextFlightNumber: upcoming?.flightNumber ?? completed.length + 1,
     },
     news: FALLBACK_NEWS,
-    nextLaunchDate: upcoming?.dateUtc ?? '2026-09-28T12:15:00Z',
+    nextLaunchDate: upcoming?.dateUtc ?? null,
     rocketName: 'Starship',
     dataSource: 'fallback',
     lastUpdated: new Date().toISOString(),
