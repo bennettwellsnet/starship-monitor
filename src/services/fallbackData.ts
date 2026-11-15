@@ -1,7 +1,7 @@
 import type { DashboardData, NewsItem, StarshipFlight } from '../types';
 
 /** Curated Starship integrated-flight-test history (fallback when API unavailable).
- *  Sources: SpaceX flight pages, Wikipedia Starship flights 14 and 15 (as of 2026-10-05).
+ *  Sources: SpaceX flight pages, Launch Library 2, Wikipedia List of Starship launches, Next Spaceflight (as of 2026-11-15).
  */
 export const FALLBACK_FLIGHTS: StarshipFlight[] = [
   {
@@ -191,21 +191,31 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     id: 'flight-15',
     flightNumber: 15,
     name: 'Flight 15',
-    dateUtc: '2026-10-19T00:00:00Z',
+    dateUtc: '2026-11-13T22:47:36Z',
     site: 'Starbase OLP-2',
-    outcome: 'upcoming',
+    outcome: 'success',
     summary:
-      'Fourth Block 3 flight (B22/S42), planned from Pad 2 into low Earth orbit. Air-traffic planning still lists a provisional NET of October 19, 2026; SpaceX has not announced an official date or time, so the clock tracks that UTC date only. Payload and recovery plan are unconfirmed. A tower catch of the ship — and possibly the first Block 3 booster catch — remains a discussed goal. Ship 42 completed chopstick catch tests at Pad 2 on Sept 11–12.',
+      'Fourth Block 3 flight (B22/S42) and the second Starship to reach orbit. Liftoff 22:47:36 UTC on Nov 13 from Pad 2. After a nominal ascent, a single Raptor completed the orbital insertion burn. All 26 Starlink V3 satellites (Group 31-2) deployed, and SpaceX reported contact with every satellite. After more than 20 hours on orbit, the ship deorbited and 22.5 hours after liftoff was caught by the Pad 2 tower arms — the first Starship upper-stage catch. The booster relit 32 of 33 engines for boostback; the burn ended early due to low fuel mass (root cause under investigation). Guidance aborted the catch and diverted the booster offshore; after a landing burn over the Gulf, the flight termination system was triggered.',
     milestones: [
-      'Provisional NET Oct 19 (no official T-0)',
-      'Possible first ship tower catch',
-      'Ship 42 chopstick tests complete',
+      'First ship tower catch',
+      '26 operational Starlink V3 deployed',
+      'Second sustained orbit',
+      'Booster catch aborted (FTS over Gulf)',
     ],
-    reachedSpace: false,
+    reachedSpace: true,
   },
 ];
 
 export const FALLBACK_NEWS: NewsItem[] = [
+  {
+    id: 'n10',
+    title:
+      'Flight 15 reaches orbit, deploys all 26 Starlink V3 satellites, and makes the first ship tower catch at Starbase; booster catch aborted',
+    date: '2026-11-14',
+    source: 'SpaceX',
+    url: 'https://www.spacex.com/launches/starship-flight-15',
+    tag: 'flight',
+  },
   {
     id: 'n8',
     title:
