@@ -193,7 +193,7 @@ export const FALLBACK_FLIGHTS: StarshipFlight[] = [
     name: 'Flight 15',
     dateUtc: '2026-11-13T22:47:36Z',
     site: 'Starbase OLP-2',
-    outcome: 'success',
+    outcome: 'partial',
     summary:
       'Fourth Block 3 flight (B22/S42) and the second Starship to reach orbit. Liftoff 22:47:36 UTC on Nov 13 from Pad 2. After a nominal ascent, a single Raptor completed the orbital insertion burn. All 26 Starlink V3 satellites (Group 31-2) deployed, and SpaceX reported contact with every satellite. After more than 20 hours on orbit, the ship deorbited and 22.5 hours after liftoff was caught by the Pad 2 tower arms — the first Starship upper-stage catch. The booster relit 32 of 33 engines for boostback; the burn ended early due to low fuel mass (root cause under investigation). Guidance aborted the catch and diverted the booster offshore; after a landing burn over the Gulf, the flight termination system was triggered.',
     milestones: [
